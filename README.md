@@ -1,5 +1,6 @@
 # Site de vanzare-cumparare
 Site-ul la care m-am gandit va avea urmatoarele functionalitati:
+
     - Pagina de LOGIN si REGISTER: aceasta permite utilizatorului sa se autentifice folosind o adresa de email. Va cere de asemenea si anumite date auxiliare cum ar fi adresa;
     
     - Introducerea unui produs care va fi dat spre vanzare: aici, se vor introduce mai intai o serie de poze cu obiectul respectiv(va fi un numar maxim de poze), starea acestuia, pretul, o scurta descriere, etc.;
