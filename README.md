@@ -14,4 +14,4 @@ Site-ul la care m-am gandit va avea urmatoarele functionalitati:
     - Promovarea produselor: se va putea alege optiunea de a promova produsul pe care il vinzi, contra unei sume de bani. Aceasta va consta in aparitia produsului respectiv in capul listei produselor;
    
 
-![database](https://github.com/CristianHoban/PS_Project/assets/126794626/5195128a-1afc-44aa-ae4a-db4f63128721)
+<img src="https://github.com/CristianHoban/PS_Project/assets/126794626/5195128a-1afc-44aa-ae4a-db4f63128721" width="300">
