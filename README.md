@@ -12,5 +12,6 @@ Site-ul la care m-am gandit va avea urmatoarele functionalitati:
     - Sistem de evaluare si recenzii: Dupa realizarea cumpararii unui produs, va exista posibilitatea sa adaugi o recenzie pentru persoana care l-a vandut, aceasta aparand pe profilul acesteia;
     
     - Promovarea produselor: se va putea alege optiunea de a promova produsul pe care il vinzi, contra unei sume de bani. Aceasta va consta in aparitia produsului respectiv in capul listei produselor;
-    ![database](https://github.com/CristianHoban/PS_Project/assets/126794626/8fed38f0-27d6-4438-8f19-7d48011122bf)
+   
 
+![database](https://github.com/CristianHoban/PS_Project/assets/126794626/5195128a-1afc-44aa-ae4a-db4f63128721)
