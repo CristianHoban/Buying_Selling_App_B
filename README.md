@@ -15,14 +15,23 @@ Site-ul la care m-am gandit va avea urmatoarele functionalitati:
     
 ## Baza de date
 
-Baza de date pe care am gandit-o contine 4 tabele:
+Baza de date pe care am gandit-o contine 5 tabele:
 - User
 - Product
 - ProductPhoto
-- Review,
+- Review
+- Trade,
   
 fiecare cu atributele care se pot observa in diagrama de baze de date de mai jos:
 
 <p align="center">
-  <img src="https://github.com/CristianHoban/PS_Project/assets/126794626/5195128a-1afc-44aa-ae4a-db4f63128721" width="700">
+  <img src="https://github.com/CristianHoban/PS_Project/assets/126794626/f18d2729-1136-423c-b964-69e94696c426" width="700">
 </p>
+
+### Relatii intre tabele
+
+- Relatie **one-to-many** intre *User* si *Product*: fiecare utilizator poate incarca mai multe produse spre vanzare;
+- Relatie **one-to-many** intre *Product* si *ProductPhoto*: fiecare produs poate avea mai multe poze;
+- Relatie **one-to-many** intre *User* si *Review*: fiecare user poate primi mai multe recenzii pentru profilul lui;
+- Relatie **one-to-one** intre *Product* si *Trade*: un produs poate fi atribuit unei singure tranzactii;
+- 2 relatii **one-to-many** intre *Product* si *Trade*: o tranzactie poate avea un singur vanzator si un singur cumparator, dar un utilizator poate fi parte a mai multor tranzactii.
