@@ -9,12 +9,23 @@ import com.example.restservice.service.UserService;
 
 import java.util.Optional;
 
+/**
+ * cu ajutorul acestei clase, se realizeaza endpoint-uri pentru creare, stergere, editare si cautare in tabela User
+ */
 @RestController
 @RequestMapping("/api/users")
 public class UserController {
 
     @Autowired
     private UserService userService;
+
+    /**
+     *Endpoint pentru cautarea unui user
+     *
+     * @param id ID-ul user-ului pe care il cautam in tabela
+     * @return ResponseEntity care il contine pe userul cu ID-ul respectiv in cazul in care exista, NOT_FOUND in caz contrar
+     */
+
 
     @GetMapping("/get/{id}")
     public ResponseEntity<User> getUserById(@PathVariable Long id) {
@@ -23,11 +34,25 @@ public class UserController {
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
+
+    /**
+     * Endpoint pentru adaugarea unui nou User
+     * @param user Obiectul User care va fi adaugat in tabel
+     * @return
+     */
     @PostMapping("/add")
     public ResponseEntity<User> createUser(@RequestBody User user) {
         User createdUser = userService.createUser(user);
         return new ResponseEntity<>(createdUser, HttpStatus.CREATED);
     }
+
+    /**
+     * Endpoint for updating an existing user.
+     *
+     * @param id   ID-ul User-ului care se vrea a fi modificat
+     * @param user User-ul modificat
+     * @return NOT_FOUND, in cazul in care nu a fost gasit un User cu ID-ul respectiv
+            */
 
     @PutMapping("/put/{id}")
     public ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody User user) {
@@ -38,6 +63,13 @@ public class UserController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
+
+
+    /**
+     * Endpoint pentru stergerea unui User
+     * @param id ID-ul user-ului care va fi sters
+     * @return
+     */
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> deleteUser(@PathVariable Long id) {

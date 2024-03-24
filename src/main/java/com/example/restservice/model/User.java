@@ -4,6 +4,7 @@ package com.example.restservice.model;
 
 import jakarta.persistence.*;
 
+
 @Entity
 public class User {
     @Id

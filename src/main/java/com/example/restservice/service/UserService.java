@@ -6,6 +6,11 @@ import com.example.restservice.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
+
+/**
+ * se instantiaza un obiect de tipul userRepository, cu ajutorul caruia vom putea realiza operatii CRUD pe tabelul User
+ * am realizat cate o functie care apeleaza fiecare din cele 4 operatii de baza
+ */
 @Service
 public class UserService {
     @Autowired
