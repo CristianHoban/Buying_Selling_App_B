@@ -1,6 +1,10 @@
 package com.example.restservice.model;
 
 import jakarta.persistence.*;
+
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 public class Product {
     @Id
@@ -21,6 +25,9 @@ public class Product {
     private double price;
     @Column(name = "description")
     private String description;
+
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Photo> photos = new ArrayList<>();
 
     public Product(long id, User user, String type, String condition, int promoted, double price, String description) {
         this.id = id;

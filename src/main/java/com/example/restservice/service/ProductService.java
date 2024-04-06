@@ -36,11 +36,6 @@ public class ProductService {
 
     @Transactional
     public void deleteProduct(Long id) {
-        photoService.deleteAllPhotosByProductId(id);
         productRepository.deleteById(id);
-    }
-    @Transactional
-    public void deleteAllProductsByUserId(Long userId){
-        productRepository.deleteByUserId(userId);
     }
 }

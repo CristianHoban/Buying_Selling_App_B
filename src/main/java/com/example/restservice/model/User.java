@@ -4,6 +4,9 @@ package com.example.restservice.model;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 @Entity
 public class User {
@@ -22,6 +25,9 @@ public class User {
     private String address;
     @Column(name = "balance")
     private double balance;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Product> products = new ArrayList<>();
 
     public User(){}
 

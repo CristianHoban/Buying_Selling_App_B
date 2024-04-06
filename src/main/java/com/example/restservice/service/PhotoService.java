@@ -30,11 +30,9 @@ public class PhotoService {
         return null;
     }
 
+    @Transactional
     public void deletePhoto(Long id) {
         photoRepository.deleteById(id);
     }
-    @Transactional
-    public void deleteAllPhotosByProductId(Long productId){
-        photoRepository.deleteByProductId(productId);
-    }
+
 }

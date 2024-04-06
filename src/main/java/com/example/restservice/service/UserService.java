@@ -37,7 +37,6 @@ public class UserService {
 
     @Transactional
     public void deleteUser(Long id) {
-        productService.deleteAllProductsByUserId(id);
         userRepository.deleteById(id);
     }
 }
