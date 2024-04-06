@@ -1,6 +1,7 @@
 package com.example.restservice.service;
 
 import com.example.restservice.model.User;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.*;
 import com.example.restservice.repository.UserRepository;
 import org.springframework.stereotype.Service;
@@ -15,6 +16,8 @@ import java.util.Optional;
 public class UserService {
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private ProductService productService;
 
     public Optional<User> getUserById(Long id) {
         return userRepository.findById(id);
@@ -32,7 +35,9 @@ public class UserService {
         return null;
     }
 
+    @Transactional
     public void deleteUser(Long id) {
+        productService.deleteAllProductsByUserId(id);
         userRepository.deleteById(id);
     }
 }

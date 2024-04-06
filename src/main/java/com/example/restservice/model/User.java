@@ -20,16 +20,21 @@ public class User {
     private String password;
     @Column(name = "address")
     private String address;
+    @Column(name = "balance")
+    private double balance;
 
     public User(){}
 
-    public User(long id, String lastName, String firstName, String email, String password, String address) {
+
+
+    public User(long id, String lastName, String firstName, String email, String password, String address, double balance) {
         this.id = id;
         this.lastName = lastName;
         this.firstName = firstName;
         this.email = email;
         this.password = password;
         this.address = address;
+        this.balance = balance;
     }
 
     public long getId() {
@@ -78,5 +83,13 @@ public class User {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public double getBalance() {
+        return balance;
+    }
+
+    public void setBalance(double balance) {
+        this.balance = balance;
     }
 }
