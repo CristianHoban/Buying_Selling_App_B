@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import com.example.restservice.service.UserService;
+import com.example.restservice.service.UserServiceImpl;
 
 import java.util.Optional;
 
@@ -17,7 +17,7 @@ import java.util.Optional;
 public class UserController {
 
     @Autowired
-    private UserService userService;
+    private UserServiceImpl userServiceImpl;
 
     /**
      *Endpoint pentru cautarea unui user
@@ -29,7 +29,7 @@ public class UserController {
 
     @GetMapping("/get/{id}")
     public ResponseEntity<User> getUserById(@PathVariable Long id) {
-        Optional<User> user = userService.getUserById(id);
+        Optional<User> user = userServiceImpl.getUserById(id);
         return user.map(value -> new ResponseEntity<>(value, HttpStatus.OK))
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
@@ -42,7 +42,7 @@ public class UserController {
      */
     @PostMapping("/add")
     public ResponseEntity<User> createUser(@RequestBody User user) {
-        User createdUser = userService.createUser(user);
+        User createdUser = userServiceImpl.createUser(user);
         return new ResponseEntity<>(createdUser, HttpStatus.CREATED);
     }
 
@@ -56,7 +56,7 @@ public class UserController {
 
     @PutMapping("/put/{id}")
     public ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody User user) {
-        User updatedUser = userService.updateUser(id, user);
+        User updatedUser = userServiceImpl.updateUser(id, user);
         if (updatedUser != null) {
             return new ResponseEntity<>(updatedUser, HttpStatus.OK);
         } else {
@@ -73,14 +73,14 @@ public class UserController {
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
-        userService.deleteUser(id);
+        userServiceImpl.deleteUser(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @PostMapping("/admin/updateBalances")
     public ResponseEntity<?> updateAllUserBalances(@RequestBody double amount) {
-        userService.performAdminAction(amount);
-        userService.addBalanceToUsers(amount);
+        userServiceImpl.performAdminAction(amount);
+        userServiceImpl.addBalanceToUsers(amount);
         return ResponseEntity.ok().build();
     }
 }
