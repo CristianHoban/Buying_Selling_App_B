@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.*;
 import com.example.restservice.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -24,6 +25,8 @@ public class TradeService {
         return tradeRepository.findById(id);
     }
 
+    public Optional<List<Trade>> getTradesByEmail(String email){return tradeRepository.findByEmail(email);}
+
     public Trade createTrade(Trade trade) {
         return tradeRepository.save(trade);
     }
@@ -35,6 +38,8 @@ public class TradeService {
         }
         return null;
     }
+
+
 
     @Transactional
     public void deleteTrade(Long id) {

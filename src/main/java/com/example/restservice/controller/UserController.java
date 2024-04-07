@@ -52,7 +52,7 @@ public class UserController {
      * @param id   ID-ul User-ului care se vrea a fi modificat
      * @param user User-ul modificat
      * @return NOT_FOUND, in cazul in care nu a fost gasit un User cu ID-ul respectiv
-            */
+     */
 
     @PutMapping("/put/{id}")
     public ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody User user) {
@@ -75,5 +75,12 @@ public class UserController {
     public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
         userService.deleteUser(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @PostMapping("/admin/updateBalances")
+    public ResponseEntity<?> updateAllUserBalances(@RequestBody double amount) {
+        userService.performAdminAction(amount);
+        userService.addBalanceToUsers(amount);
+        return ResponseEntity.ok().build();
     }
 }

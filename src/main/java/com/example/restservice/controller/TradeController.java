@@ -12,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -51,5 +52,11 @@ public class TradeController {
     public ResponseEntity<Void> deleteTrade(@PathVariable Long id) {
         tradeService.deleteTrade(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+    @GetMapping("/getTradesByEmail/{email}")
+    public ResponseEntity<List<Trade>> getTradesByEmail(@PathVariable String email) {
+        Optional<List<Trade>> trades = tradeService.getTradesByEmail(email);
+        return trades.map(value -> new ResponseEntity<>(value, HttpStatus.OK))
+                .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 }

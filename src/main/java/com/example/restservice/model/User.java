@@ -9,7 +9,7 @@ import java.util.List;
 
 
 @Entity
-public class User {
+public class User{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -26,6 +26,9 @@ public class User {
     @Column(name = "balance")
     private double balance;
 
+    @Column(name = "is_admin")
+    private boolean is_admin;
+
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Product> products = new ArrayList<>();
 
@@ -35,8 +38,15 @@ public class User {
     public User(){}
 
 
+    public boolean isIs_admin() {
+        return is_admin;
+    }
 
-    public User(long id, String lastName, String firstName, String email, String password, String address, double balance) {
+    public void setIs_admin(boolean is_admin) {
+        this.is_admin = is_admin;
+    }
+
+    public User(long id, String lastName, String firstName, String email, String password, String address, double balance, boolean is_admin) {
         this.id = id;
         this.lastName = lastName;
         this.firstName = firstName;
@@ -44,6 +54,7 @@ public class User {
         this.password = password;
         this.address = address;
         this.balance = balance;
+        this.is_admin = false;
     }
 
     public long getId() {

@@ -1,11 +1,13 @@
 package com.example.restservice.service;
 
 import com.example.restservice.model.User;
+import com.example.restservice.observer.AdminAction;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.*;
 import com.example.restservice.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -16,8 +18,12 @@ import java.util.Optional;
 public class UserService {
     @Autowired
     private UserRepository userRepository;
+
+    private AdminAction adminAction = new AdminAction();
     @Autowired
     private ProductService productService;
+
+
 
     public Optional<User> getUserById(Long id) {
         return userRepository.findById(id);
@@ -39,4 +45,18 @@ public class UserService {
     public void deleteUser(Long id) {
         userRepository.deleteById(id);
     }
+
+    public void performAdminAction(double amount) {
+            List<User> users = userRepository.findAll();
+            for(User user:users){
+                adminAction.notifyObserver(user, amount);
+            }
+        System.out.println("performAdminAction");
+    }
+
+    public void addBalanceToUsers(double amount){
+        userRepository.addAmountToAllUsers(amount);
+    }
+
+
 }
