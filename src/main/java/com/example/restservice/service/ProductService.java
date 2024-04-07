@@ -15,8 +15,6 @@ import java.util.Optional;
 public class ProductService {
     @Autowired
     private ProductRepository productRepository;
-    @Autowired
-    private PhotoService photoService;
 
     public Optional<Product> getProductById(Long id){
         return productRepository.findById(id);
