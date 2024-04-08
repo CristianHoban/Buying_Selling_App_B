@@ -77,6 +77,11 @@ public class UserController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
+    /**
+     * Endpoint pentru modificarea balance-ului fiecarui User - pentru ADMIN
+     * @param amount
+     * @return
+     */
     @PostMapping("/admin/updateBalances")
     public ResponseEntity<?> updateAllUserBalances(@RequestBody double amount) {
         userServiceImpl.performAdminAction(amount);

@@ -26,6 +26,10 @@ public class Product {
     @Column(name = "description")
     private String description;
 
+    /**
+     * anotatia @OneToMany ajuta la corectitudinea modului in care foreign key lucreaza. orphanRemoval setet pe true, asigura
+     * ca in momentul in care se sterg parintii, copiii corespunzatori vor fi si ei eliminati din baza de date
+     */
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Photo> photos = new ArrayList<>();
 

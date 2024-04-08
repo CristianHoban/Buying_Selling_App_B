@@ -53,6 +53,13 @@ public class TradeController {
         tradeService.deleteTrade(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+
+    /**
+     * Endpoint care returneaza tranzactiile facute de un anumit User pe baza adresei de email, cele de cumparare,
+     * cat si cele de vanzare
+     * @param email
+     * @return lista cu trade-urile care au email-ul de la parametru la vanzator sau la cumparator
+     */
     @GetMapping("/getTradesByEmail/{email}")
     public ResponseEntity<List<Trade>> getTradesByEmail(@PathVariable String email) {
         Optional<List<Trade>> trades = tradeService.getTradesByEmail(email);

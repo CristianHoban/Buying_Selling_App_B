@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 /**
+ * Implementeaza interfata UserService si implementeaza totodata metodele cu care aceasta vine;
  * se instantiaza un obiect de tipul userRepository, cu ajutorul caruia vom putea realiza operatii CRUD pe tabelul User
  * am realizat cate o functie care apeleaza fiecare din cele 4 operatii de baza
  */
@@ -46,12 +47,15 @@ public class UserServiceImpl implements UserService{
         userRepository.deleteById(id);
     }
 
+    /**
+     * metoda care apeleaza notifyUser pentru fiecare User, in momentul in care este apelata din controller
+     * @param amount
+     */
     public void performAdminAction(double amount) {
             List<User> users = userRepository.findAll();
             for(User user:users){
                 adminAction.notifyObserver(user, amount);
             }
-        System.out.println("performAdminAction");
     }
 
     public void addBalanceToUsers(double amount){
