@@ -4,6 +4,10 @@ import com.example.restservice.model.User;
 
 import java.util.Optional;
 
+/**
+ * Interfata care are metodele care ne vor ajuta in modelarea bazei de date. Este realizata
+ * pentru a facilita decuplarea.
+ */
 public interface UserService {
     public Optional<User> getUserById(Long id);
     public User createUser(User user);
