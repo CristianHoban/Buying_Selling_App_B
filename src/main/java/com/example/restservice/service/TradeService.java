@@ -1,11 +1,9 @@
 package com.example.restservice.service;
 
+import com.example.restservice.data.TradeContract;
 import com.example.restservice.model.Trade;
-import com.example.restservice.model.User;
-import com.example.restservice.repository.TradeRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.*;
-import com.example.restservice.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,23 +16,23 @@ import java.util.Optional;
 @Service
 public class TradeService {
     @Autowired
-    private TradeRepository tradeRepository;
+    private TradeContract tradeContract;
 
 
     public Optional<Trade> getTradeById(Long id) {
-        return tradeRepository.findById(id);
+        return tradeContract.findById(id);
     }
 
-    public Optional<List<Trade>> getTradesByEmail(String email){return tradeRepository.findByEmail(email);}
+    public Optional<List<Trade>> getTradesByEmail(String email){return tradeContract.findByEmail(email);}
 
     public Trade createTrade(Trade trade) {
-        return tradeRepository.save(trade);
+        return tradeContract.save(trade);
     }
 
     public Trade updateTrade(Long id, Trade newTrade) {
-        if (tradeRepository.existsById(id)) {
+        if (tradeContract.existsById(id)) {
             newTrade.setId(id);
-            return tradeRepository.save(newTrade);
+            return tradeContract.save(newTrade);
         }
         return null;
     }
@@ -43,6 +41,6 @@ public class TradeService {
 
     @Transactional
     public void deleteTrade(Long id) {
-        tradeRepository.deleteById(id);
+        tradeContract.deleteById(id);
     }
 }

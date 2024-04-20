@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 
 @Entity
@@ -46,7 +47,7 @@ public class User{
         this.is_admin = is_admin;
     }
 
-    public User(long id, String lastName, String firstName, String email, String password, String address, double balance, boolean is_admin) {
+    public User(long id, String lastName, String firstName, String email, String password, String address, double balance) {
         this.id = id;
         this.lastName = lastName;
         this.firstName = firstName;
@@ -111,5 +112,18 @@ public class User{
 
     public void setBalance(double balance) {
         this.balance = balance;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return id == user.id && Double.compare(user.balance, balance) == 0 && is_admin == user.is_admin && Objects.equals(lastName, user.lastName) && Objects.equals(firstName, user.firstName) && Objects.equals(email, user.email) && Objects.equals(password, user.password) && Objects.equals(address, user.address) && Objects.equals(products, user.products) && Objects.equals(reviews, user.reviews);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, lastName, firstName, email, password, address, balance, is_admin, products, reviews);
     }
 }

@@ -1,10 +1,11 @@
 package com.example.restservice.service;
 
+import com.example.restservice.data.UserContract;
 import com.example.restservice.model.User;
 import com.example.restservice.observer.AdminAction;
+import com.example.restservice.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.*;
-import com.example.restservice.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,8 +19,15 @@ import java.util.Optional;
 @Service
 public class UserServiceImpl implements UserService{
     @Autowired
-    private UserRepository userRepository;
+    private final UserContract userContract;
 
+    /*public UserServiceImpl(){
+        this.userRepository = new UserRepositoryImpl();
+    }
+*/
+    public UserServiceImpl(UserContract userContract){
+        this.userContract = userContract;
+    }
     private AdminAction adminAction = new AdminAction();
     @Autowired
     private ProductService productService;
@@ -27,24 +35,24 @@ public class UserServiceImpl implements UserService{
 
 
     public Optional<User> getUserById(Long id) {
-        return userRepository.findById(id);
+        return userContract.findById(id);
     }
 
     public User createUser(User user) {
-        return userRepository.save(user);
+        return userContract.save(user);
     }
 
     public User updateUser(Long id, User newUser) {
-        if (userRepository.existsById(id)) {
+        if (userContract.existsById(id)) {
             newUser.setId(id);
-            return userRepository.save(newUser);
+            return userContract.save(newUser);
         }
         return null;
     }
 
     @Transactional
     public void deleteUser(Long id) {
-        userRepository.deleteById(id);
+        userContract.deleteById(id);
     }
 
     /**
@@ -52,14 +60,14 @@ public class UserServiceImpl implements UserService{
      * @param amount
      */
     public void performAdminAction(double amount) {
-            List<User> users = userRepository.findAll();
+            List<User> users = userContract.findAll();
             for(User user:users){
                 adminAction.notifyObserver(user, amount);
             }
     }
 
     public void addBalanceToUsers(double amount){
-        userRepository.addAmountToAllUsers(amount);
+        userContract.addAmountToAllUsers(amount);
     }
 
 

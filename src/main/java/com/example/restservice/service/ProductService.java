@@ -1,10 +1,7 @@
 package com.example.restservice.service;
 
+import com.example.restservice.data.ProductContract;
 import com.example.restservice.model.Product;
-import com.example.restservice.model.User;
-import com.example.restservice.repository.PhotoRepository;
-import com.example.restservice.repository.ProductRepository;
-import com.example.restservice.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,26 +11,26 @@ import java.util.Optional;
 @Service
 public class ProductService {
     @Autowired
-    private ProductRepository productRepository;
+    private ProductContract productContract;
 
     public Optional<Product> getProductById(Long id){
-        return productRepository.findById(id);
+        return productContract.findById(id);
     }
 
     public Product createProduct(Product product) {
-        return productRepository.save(product);
+        return productContract.save(product);
     }
 
     public Product updateProduct(Long id, Product newProduct) {
-        if (productRepository.existsById(id)) {
+        if (productContract.existsById(id)) {
             newProduct.setId(id);
-            return productRepository.save(newProduct);
+            return productContract.save(newProduct);
         }
         return null;
     }
 
     @Transactional
     public void deleteProduct(Long id) {
-        productRepository.deleteById(id);
+        productContract.deleteById(id);
     }
 }
