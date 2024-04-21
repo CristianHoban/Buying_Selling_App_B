@@ -17,14 +17,31 @@ public class ProductService {
         this.productContract = productContract;
     }
 
+
+    /**
+     * Retrieves a product by ID.
+     * @param id the ID of the product to retrieve
+     * @return an Optional containing the found product, or empty if not found
+     */
     public Optional<Product> getProductById(Long id){
         return productContract.findById(id);
     }
 
+    /**
+     * Creates a new product.
+     * @param product the product to create
+     * @return the created product
+     */
     public Product createProduct(Product product) {
         return productContract.save(product);
     }
 
+    /**
+     * Updates an existing product.
+     * @param id the ID of the product to update
+     * @param newProduct the new product data
+     * @return the updated product, or null if the product does not exist
+     */
     public Product updateProduct(Long id, Product newProduct) {
         if (productContract.existsById(id)) {
             newProduct.setId(id);
@@ -33,6 +50,10 @@ public class ProductService {
         return null;
     }
 
+    /**
+     * Deletes a product by ID.
+     * @param id the ID of the product to delete
+     */
     @Transactional
     public void deleteProduct(Long id) {
         productContract.deleteById(id);

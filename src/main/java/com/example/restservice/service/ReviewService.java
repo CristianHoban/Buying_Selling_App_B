@@ -16,14 +16,30 @@ public class ReviewService {
         this.reviewContract = reviewContract;
     }
 
+    /**
+     * Retrieves a review by ID.
+     * @param id the ID of the review to retrieve
+     * @return an Optional containing the found review, or empty if not found
+     */
     public Optional<Review> getReviewById(Long id){
         return reviewContract.findById(id);
     }
 
+    /**
+     * Creates a new review.
+     * @param review the review to create
+     * @return the created review
+     */
     public Review createReview(Review review) {
         return reviewContract.save(review);
     }
 
+    /**
+     * Updates an existing review.
+     * @param id the ID of the review to update
+     * @param newReview the new review data
+     * @return the updated review, or null if the review does not exist
+     */
     public Review updateReview(Long id, Review newReview) {
         if (reviewContract.existsById(id)) {
             newReview.setId(id);
@@ -32,6 +48,10 @@ public class ReviewService {
         return null;
     }
 
+    /**
+     * Deletes a review by ID.
+     * @param id the ID of the review to delete
+     */
     @Transactional
     public void deleteReview(Long id) {
         reviewContract.deleteById(id);

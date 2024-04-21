@@ -12,9 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * Implementeaza interfata UserService si implementeaza totodata metodele cu care aceasta vine;
- * se instantiaza un obiect de tipul userRepository, cu ajutorul caruia vom putea realiza operatii CRUD pe tabelul User
- * am realizat cate o functie care apeleaza fiecare din cele 4 operatii de baza
+ *
  */
 @Service
 public class UserServiceImpl implements UserService{
@@ -33,15 +31,31 @@ public class UserServiceImpl implements UserService{
     private ProductService productService;
 
 
-
+    /**
+     * Retrieves a user by ID.
+     * @param id the ID of the user to retrieve
+     * @return an Optional containing the found user, or empty if not found
+     */
     public Optional<User> getUserById(Long id) {
         return userContract.findById(id);
     }
 
+    /**
+     * Creates a new user.
+     * @param user the user to create
+     * @return the created user
+     */
     public User createUser(User user) {
         return userContract.save(user);
     }
 
+
+    /**
+     * Updates an existing user.
+     * @param id the ID of the user to update
+     * @param newUser the new user data
+     * @return the updated user, or null if the user does not exist
+     */
     public User updateUser(Long id, User newUser) {
         if (userContract.existsById(id)) {
             newUser.setId(id);
@@ -50,14 +64,18 @@ public class UserServiceImpl implements UserService{
         return null;
     }
 
+    /**
+     * Deletes a user by ID.
+     * @param id the ID of the user to delete
+     */
     @Transactional
     public void deleteUser(Long id) {
         userContract.deleteById(id);
     }
 
     /**
-     * metoda care apeleaza notifyUser pentru fiecare User, in momentul in care este apelata din controller
-     * @param amount
+     * Performs an admin action, notifying users.
+     * @param amount the amount associated with the admin action
      */
     public void performAdminAction(double amount) {
             List<User> users = userContract.findAll();
@@ -66,6 +84,10 @@ public class UserServiceImpl implements UserService{
             }
     }
 
+    /**
+     * Adds balance to all users.
+     * @param amount the amount to add to each user's balance
+     */
     public void addBalanceToUsers(double amount){
         userContract.addAmountToAllUsers(amount);
     }
