@@ -41,13 +41,15 @@ fiecare cu atributele care se pot observa in diagrama de baze de date de mai jos
 
   ## Implementare
 
-  Programul pe care l-am realizat pana acum este impartit in 5 pachete:
+  Programul pe care l-am realizat pana acum este impartit in 6 pachete:
 - **model**-
   In acest pachet, am creat o clasa pentru fiecare tabel al bazei de date, folosind anotatiile corespunzatoare pentru primary, respectiv foreign key;
 - **repository**-
   Pentru fiecare tabel, am creat cate o interfata care extinde JPARepository(_Repository), pentru a folosi query-urile usoare, fara a le scrie implementarea direct;
+- **data** -
+    Pentru fiecare tabel, am creat cate o interfata(_Contract), care dupa cum le si sugereaza numele, reprezinta un contract prin care datele se transmit la service. In fiecare dintre acestea, sunt definite metode pe care clasele care o sa implementeze interfetele vor trebui sa le suprascrie. Pe langa interfete, pentru fiecare tabel am creat si cate o clasa(_Data), care implementeaza interfata corespunzatoare si are cate o dependinta pentru _Repository. Aceste clase sunt folosite pentru a comunica cu baza de date. Folosind acest pachet aditional, am facut programul decuplat, fiind astfel posibila testarea.
 - **service**-
-  Am implementat cate o interfata(_Service) pentru fiecare entitate, care are ca metode tot de ce am nevoie pentru interogarea tabelelor din baza de date. Pentru fiecare din acestea, am creat o clasa(_ServiceImpl) care o extinde, in care am o dependinta pentru interfata corespunzatoare din repository. Am implementat in acest mod, pentru a face posibila decuplarea de baza de date.
+  Am implementat cate o clasa(_Service) pentru fiecare entitate, care are o dependinta catre contractul fiecarui tabel, si apeleaza fiecare metoda cu ajutorul metodelor transmise prin contracte.
 - **controller**-
   Si aici, am creat cate o clasa pentru fiecare tabel din baza de date; in acestea avem o dependinta catre clasele corespunzatoare(_ServiceImpl). Ne creem endpoint-uri pe baza metodelor din service.
 - **observer**-
