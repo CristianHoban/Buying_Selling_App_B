@@ -11,7 +11,11 @@ import java.util.Optional;
 @Service
 public class ProductService {
     @Autowired
-    private ProductContract productContract;
+    private final ProductContract productContract;
+
+    public ProductService(ProductContract productContract) {
+        this.productContract = productContract;
+    }
 
     public Optional<Product> getProductById(Long id){
         return productContract.findById(id);

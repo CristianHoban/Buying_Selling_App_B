@@ -16,8 +16,11 @@ import java.util.Optional;
 @Service
 public class TradeService {
     @Autowired
-    private TradeContract tradeContract;
+    private final TradeContract tradeContract;
 
+    public TradeService(TradeContract tradeContract) {
+        this.tradeContract = tradeContract;
+    }
 
     public Optional<Trade> getTradeById(Long id) {
         return tradeContract.findById(id);

@@ -10,7 +10,12 @@ import java.util.Optional;
 @Service
 public class ReviewService {
     @Autowired
-    private ReviewContract reviewContract;
+    private final ReviewContract reviewContract;
+
+    public ReviewService(ReviewContract reviewContract) {
+        this.reviewContract = reviewContract;
+    }
+
     public Optional<Review> getReviewById(Long id){
         return reviewContract.findById(id);
     }

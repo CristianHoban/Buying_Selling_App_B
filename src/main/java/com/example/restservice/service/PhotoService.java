@@ -10,7 +10,11 @@ import java.util.Optional;
 @Service
 public class PhotoService {
     @Autowired
-    private PhotoContract photoContract;
+    private final PhotoContract photoContract;
+
+    public PhotoService(PhotoContract photoContract) {
+        this.photoContract = photoContract;
+    }
 
     public Optional<Photo> getPhotoById(Long id){
         return photoContract.findById(id);
