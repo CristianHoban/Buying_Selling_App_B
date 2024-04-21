@@ -9,6 +9,8 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
 import static org.junit.Assert.*;
@@ -103,5 +105,21 @@ public class TradeServiceTest {
     public void deleteTradeTest() {
         tradeService.deleteTrade(1L);
         Mockito.verify(tradeContract, times(1)).deleteById(1L);
+    }
+
+    /**
+     * Test for getting the trades where a user with a specific email is involved.
+     */
+    @Test
+    public void getTradesByEmailTest() {
+        Trade trade1 = new Trade(1L, "Ex1", "Ex3", new Product());
+        Trade trade2 = new Trade(2L, "Ex2", "Ex1", new Product());
+        List<Trade> expectedTrades = Arrays.asList(trade1, trade2);
+        Mockito.when(tradeContract.findByEmail("Ex1")).thenReturn(Optional.of(expectedTrades));
+
+        Optional<List<Trade>> actualTrades = tradeService.getTradesByEmail("Ex1");
+
+        Mockito.verify(tradeContract).findByEmail("Ex1");
+        assertEquals(Optional.of(expectedTrades), actualTrades);
     }
 }
