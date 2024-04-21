@@ -52,4 +52,37 @@ fiecare cu atributele care se pot observa in diagrama de baze de date de mai jos
   Si aici, am creat cate o clasa pentru fiecare tabel din baza de date; in acestea avem o dependinta catre clasele corespunzatoare(_ServiceImpl). Ne creem endpoint-uri pe baza metodelor din service.
 - **observer**-
   Deocamdata, in acest pachet este o singura clasa AdminAction, care contine o metoda de notificare pentru un User. Aceasta se va apela pentru fiecare user, in momentul in care adminul decide sa acorde voucher cadou.
-  
+
+## Endpoint-uri
+Pentru fiecare tabel din baza de date, am implementat cate un controller in care sunt construite endpoint-urile de care voi avea nevoie:
+### User
+- http://localhost:8082/api/users/add - endpoint pentru adaugarea unui user in baza de date
+- http://localhost:8082/api/users/get/{id} - endpoint pentru cautarea unui user cu un ID specific in baza de date
+- http://localhost:8082/api/users/put/{id} - endpoint pentru modificarea unui user cu un ID specific din baza de date
+- http://localhost:8082/api/users/delete/{id} - endpoint pentru stergerea unui user cu ID specific din baza de date
+- http://localhost:8082/api/users/admin/updateBalances - endpoint folosit doar pentru admin, pentru a modifica balantele tuturor user-ilor
+
+### Product
+- http://localhost:8082/api/products/add - endpoint pentru adaugarea unui produs in baza de date
+- http://localhost:8082/api/products/get/{id} - endpoint pentru cautarea unui produs cu un ID specific in baza de date
+- http://localhost:8082/api/products/put/{id} - endpoint pentru modificarea unui produs cu un ID specific din baza de date
+- http://localhost:8082/api/products/delete{id} - endpoint pentru stergerea unui produs cu un ID specific din baza de date
+
+### Trade
+- http://localhost:8082/api/trades/add - endpoint pentru adaugarea unei tranzactii in baza de date
+- http://localhost:8082/api/trades/get/{id} - endpoint pentru cautarea unei tranzactii cu un ID specific in baza de date
+- http://localhost:8082/api/trades/put/{id} - endpoint pentru modificarea unei tranzactii cu un ID specific din baza de date
+- http://localhost:8082/api/trades/delete{id} - endpoint pentru stergerea unei tranzactii cu un ID specific din baza de date
+- http://localhost:8082/api/trades/getTradesByEmail/{email} - endpoint pentru cautarea tranzactiilor in care un user cu un email specific este implicat
+
+### Review
+- http://localhost:8082/api/reviews/add - endpoint pentru adaugarea unei recenzii in baza de date
+- http://localhost:8082/api/reviews/get/{id} - endpoint pentru cautarea unei recenzii cu un ID specific in baza de date
+- http://localhost:8082/api/reviews/put/{id} - endpoint pentru modificarea unei recenzii cu un ID specific din baza de date
+- http://localhost:8082/api/reviews/delete{id} - endpoint pentru stergerea unei recenzii cu un ID specific din baza de date
+
+### Photo
+- http://localhost:8082/api/photos/add - endpoint pentru adaugarea unei imagini in baza de date
+- http://localhost:8082/api/photos/get/{id} - endpoint pentru cautarea unei imagini cu un ID specific in baza de date
+- http://localhost:8082/api/photos/put/{id} - endpoint pentru modificarea unei imagini cu un ID specific din baza de date
+- http://localhost:8082/api/photos/delete{id} - endpoint pentru stergerea unei imagini cu un ID specific din baza de date
