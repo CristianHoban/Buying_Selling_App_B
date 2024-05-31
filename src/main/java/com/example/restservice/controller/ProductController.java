@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -47,5 +48,19 @@ public class ProductController {
     public ResponseEntity<Void> deleteProduct(@PathVariable Long id) {
         productService.deleteProduct(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @GetMapping("/getByUserId/{id}")
+    public ResponseEntity<List<Product>> getProductsByUserId(@PathVariable Long id) {
+        Optional<List<Product>> products = productService.getProductsByUserId(id);
+        return products.map(value -> new ResponseEntity<>(value, HttpStatus.OK))
+                .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
+
+    @GetMapping("/getByUserIdExTrades/{id}")
+    public ResponseEntity<List<Product>> getProductsByUserIdExTrades(@PathVariable Long id) {
+        Optional<List<Product>> products = productService.getProductsByUserIdNotInTrade(id);
+        return products.map(value -> new ResponseEntity<>(value, HttpStatus.OK))
+                .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 }

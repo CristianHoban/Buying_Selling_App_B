@@ -92,5 +92,30 @@ public class UserServiceImpl implements UserService{
         userContract.addAmountToAllUsers(amount);
     }
 
+//    @Override
+//    public User registerNewUser(User user) {
+//        if (userContract.findByEmail(user.getEmail()).isPresent()) {
+//            return null; // Email already exists, return null or handle as needed
+//        }
+//        return userContract.save(user); // Save and return the new user if email not found
+//    }
+
+    public Optional<User> login(String email, String password) {
+        return userContract.findByEmailAndPassword(email, password);
+    }
+
+    @Override
+    public Optional<User> findByEmail(String email) {
+        return userContract.findByEmail(email);
+    }
+
+    @Override
+    public User registerNewUser(User user) {
+        if (userContract.findByEmail(user.getEmail()).isPresent()) {
+            return null; // Email already exists, return null or handle as needed
+        }
+        return userContract.save(user); // Save and return the new user if email not found
+    }
+
 
 }

@@ -15,4 +15,13 @@ public interface UserService {
     public void deleteUser(Long id);
     public void addBalanceToUsers(double amount);
 
+    //public User registerNewUser(User user);
+
+    public Optional<User> login(String email, String password);
+
+    public Optional<User> findByEmail(String email);
+
+    public User registerNewUser(User user);
+
+
 }

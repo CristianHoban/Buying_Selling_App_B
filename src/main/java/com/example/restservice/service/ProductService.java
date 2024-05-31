@@ -6,6 +6,7 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -27,6 +28,9 @@ public class ProductService {
         return productContract.findById(id);
     }
 
+    public Optional<List<Product>> getProductsByUserId(Long id){
+        return productContract.findByUserId(id);
+    }
     /**
      * Creates a new product.
      * @param product the product to create
@@ -57,5 +61,9 @@ public class ProductService {
     @Transactional
     public void deleteProduct(Long id) {
         productContract.deleteById(id);
+    }
+
+    public Optional<List<Product>> getProductsByUserIdNotInTrade(Long userId) {
+        return productContract.findAllByUserIdAndNotInTrade(userId);
     }
 }

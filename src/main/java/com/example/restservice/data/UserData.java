@@ -29,6 +29,11 @@ public class UserData implements UserContract{
         return userRepository.findById(id);
     }
 
+    @Override
+    public Optional<User> findByEmail(String email) {
+        return userRepository.findByEmail(email);
+    }
+
     /**
      * A method that saves a specific user, by using save() method from JPA repository
      * @param user
@@ -71,5 +76,10 @@ public class UserData implements UserContract{
     @Override
     public void addAmountToAllUsers(double amount) {
         this.userRepository.addAmountToAllUsers(amount);
+    }
+
+    @Override
+    public Optional<User> findByEmailAndPassword(String email, String password) {
+        return userRepository.findByEmailAndPassword(email, password);
     }
 }

@@ -5,6 +5,7 @@ import com.example.restservice.repository.ReviewRepository;
 import com.example.restservice.repository.TradeRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -55,5 +56,10 @@ public class ReviewData implements ReviewContract{
     @Override
     public void deleteById(Long id) {
         this.reviewRepository.deleteById(id);
+    }
+
+    @Override
+    public Optional<List<Review>> findByUserId(Long id) {
+       return this.reviewRepository.findByUserId(id);
     }
 }

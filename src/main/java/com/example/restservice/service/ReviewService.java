@@ -6,6 +6,7 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 @Service
 public class ReviewService {
@@ -55,5 +56,9 @@ public class ReviewService {
     @Transactional
     public void deleteReview(Long id) {
         reviewContract.deleteById(id);
+    }
+
+    public Optional<List<Review>> findByUserId(Long id){
+        return reviewContract.findByUserId(id);
     }
 }

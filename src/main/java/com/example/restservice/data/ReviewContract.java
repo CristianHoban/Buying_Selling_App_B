@@ -2,6 +2,7 @@ package com.example.restservice.data;
 
 import com.example.restservice.model.Review;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -32,6 +33,8 @@ public interface ReviewContract {
      * @param id
      */
     void deleteById(Long id);
+
+    Optional<List<Review>> findByUserId(Long id);
 
 
 

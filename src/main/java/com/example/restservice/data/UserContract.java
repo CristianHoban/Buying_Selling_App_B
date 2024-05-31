@@ -4,6 +4,7 @@ import com.example.restservice.model.User;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.OptionalInt;
 
 /**
  * A contract that defines methods necessary for managing user data
@@ -15,6 +16,8 @@ public interface UserContract {
      * @return the user with specific ID, if it is found
      */
     Optional<User> findById(Long id);
+
+    Optional<User> findByEmail(String email);
     /**
      * A method that saves a user
      * It is used for creating method
@@ -45,4 +48,9 @@ public interface UserContract {
      * @param amount
      */
     void addAmountToAllUsers(double amount);
+
+    Optional<User> findByEmailAndPassword(String email, String password);
+
+
+
 }

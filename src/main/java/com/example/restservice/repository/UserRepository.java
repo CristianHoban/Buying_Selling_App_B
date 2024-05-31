@@ -7,6 +7,8 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.util.Optional;
+
 /**
  * interfata este realizata pentru a accesa elementele de tip User tin baza de date
  * extince JpaRepository pentru a mosteni operatiile basic CRUD(Create, Read, Delete, Update)
@@ -16,4 +18,11 @@ public interface UserRepository extends JpaRepository<User, Long> {
     @Transactional
     @Query("UPDATE User u SET u.balance = u.balance + :amount")
     void addAmountToAllUsers(@Param("amount") double amount);
+
+    Optional<User> findByEmailAndPassword(String email, String password);
+
+    Optional<User> findByEmail(String email);
+
+
+
 }

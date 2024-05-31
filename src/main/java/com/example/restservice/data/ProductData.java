@@ -4,6 +4,7 @@ import com.example.restservice.model.Product;
 import com.example.restservice.repository.ProductRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -52,5 +53,15 @@ public class ProductData implements ProductContract{
     @Override
     public void deleteById(Long id) {
         this.productRepository.deleteById(id);
+    }
+
+    @Override
+    public Optional<List<Product>> findByUserId(long id) {
+        return this.productRepository.findByUserId(id);
+    }
+
+    @Override
+    public Optional<List<Product>> findAllByUserIdAndNotInTrade(Long userId) {
+        return this.productRepository.findAllByUserIdAndNotInTrade(userId);
     }
 }

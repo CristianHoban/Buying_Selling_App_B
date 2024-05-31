@@ -3,6 +3,7 @@ package com.example.restservice.data;
 import com.example.restservice.model.Product;
 import com.example.restservice.model.User;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -33,4 +34,8 @@ public interface ProductContract {
      * @param id
      */
     void deleteById(Long id);
+
+    Optional<List<Product>> findByUserId(long id);
+
+    Optional<List<Product>> findAllByUserIdAndNotInTrade(Long userId);
 }
