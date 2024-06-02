@@ -63,12 +63,19 @@ Pentru fiecare tabel din baza de date, am implementat cate un controller in care
 - http://localhost:8082/api/users/put/{id} - endpoint pentru modificarea unui user cu un ID specific din baza de date
 - http://localhost:8082/api/users/delete/{id} - endpoint pentru stergerea unui user cu ID specific din baza de date
 - http://localhost:8082/api/users/admin/updateBalances - endpoint folosit doar pentru admin, pentru a modifica balantele tuturor user-ilor
+- http://localhost:8082/api/users/getByEmail/{email} - endpoint folosit pentru a cauta un user dupa email
+- http://localhost:8082/api/users/login - endpoint folosit pentru logare
+- http://localhost:8082/api/users/register - endpoint folosit pentru inregistrare
+- http://localhost:8082/api/users/updateBalance/{userId}/{amount} - endpoint pentru adaugarea/scaderea unei anumite sume de bani din balanta unui user
+- http://localhost:8082/api/users/findall - endpoint pentru gasirea tuturor user-ilor din baza de date
 
 ### Product
 - http://localhost:8082/api/products/add - endpoint pentru adaugarea unui produs in baza de date
 - http://localhost:8082/api/products/get/{id} - endpoint pentru cautarea unui produs cu un ID specific in baza de date
 - http://localhost:8082/api/products/put/{id} - endpoint pentru modificarea unui produs cu un ID specific din baza de date
 - http://localhost:8082/api/products/delete{id} - endpoint pentru stergerea unui produs cu un ID specific din baza de date
+- http://localhost:8082/api/products/getByUserId/{id} - endpoint pentru gasirea tuturor produselor puse spre vanzare de catre un anumit user
+- http://localhost:8082/api/products/getByUserIdExTrades/{id} - endpoint pentru gasirea tuturor produselor unui utilizator care nu sunt incluse intr-o tranzactie
 
 ### Trade
 - http://localhost:8082/api/trades/add - endpoint pentru adaugarea unei tranzactii in baza de date
@@ -76,15 +83,42 @@ Pentru fiecare tabel din baza de date, am implementat cate un controller in care
 - http://localhost:8082/api/trades/put/{id} - endpoint pentru modificarea unei tranzactii cu un ID specific din baza de date
 - http://localhost:8082/api/trades/delete{id} - endpoint pentru stergerea unei tranzactii cu un ID specific din baza de date
 - http://localhost:8082/api/trades/getTradesByEmail/{email} - endpoint pentru cautarea tranzactiilor in care un user cu un email specific este implicat
+- http://localhost:8082/api/trades/transaction - endpoint care introduce o tranzactie intre 2 useri in baza de date, modificandu-le si acestora balanta, in functie de cine a vandut si cine a cumparat
 
 ### Review
 - http://localhost:8082/api/reviews/add - endpoint pentru adaugarea unei recenzii in baza de date
 - http://localhost:8082/api/reviews/get/{id} - endpoint pentru cautarea unei recenzii cu un ID specific in baza de date
 - http://localhost:8082/api/reviews/put/{id} - endpoint pentru modificarea unei recenzii cu un ID specific din baza de date
 - http://localhost:8082/api/reviews/delete{id} - endpoint pentru stergerea unei recenzii cu un ID specific din baza de date
+- http://localhost:8082/api/reviews/getByUserId/{id} - endpoint pentru gasirea tuturor review-urilor pentru un user
 
 ### Photo
 - http://localhost:8082/api/photos/add - endpoint pentru adaugarea unei imagini in baza de date
 - http://localhost:8082/api/photos/get/{id} - endpoint pentru cautarea unei imagini cu un ID specific in baza de date
 - http://localhost:8082/api/photos/put/{id} - endpoint pentru modificarea unei imagini cu un ID specific din baza de date
 - http://localhost:8082/api/photos/delete{id} - endpoint pentru stergerea unei imagini cu un ID specific din baza de date
+
+## Diagrame Use-case
+![image](https://github.com/CristianHoban/PS_Project/assets/126794626/2738962c-2efc-427a-b741-25713d23024b)
+![image](https://github.com/CristianHoban/PS_Project/assets/126794626/b7afb269-bd86-4ff9-986e-9e7a79074dc4)
+![image](https://github.com/CristianHoban/PS_Project/assets/126794626/1f84d724-bd3b-4f12-9dd1-65e002c2e86b)
+
+
+
+## Structura partii de front-end
+Pentru a crea partea de front-end am folosit **React** si cuprinde mai multe componente, acestea fiind gestionate cu **react-router-dom** pentru navigarea intre pagini.
+Asadar, paginile principale sunt:
+
+- **App.js**: Componenta principală care setează rutarea. Include autentificarea, pagina principală, profilul utilizatorului, adăugarea produselor, gestionarea tranzacțiilor și pagina de administrare.
+- **Login.js/Register.js**: Pagini pentru autentificare și înregistrare utilizatori.
+- **MainPage.js**: Pagina principală unde utilizatorii pot vedea produsele disponibile.
+- **Profile.js**: Permite utilizatorilor vizualizarea detaliilor personale.
+- **UserOffers.js**: Permite utilizatorilor să vadă ofertele pe care le-au postat.
+- **AddProduct.js**: Permite utilizatorilor să adauge produse noi pentru vânzare.
+- **Transactions.js**: Arată tranzacțiile efectuate de un utilizator.
+- **LeaveReview.js/Reviews.js**: Permite utilizatorilor să lase recenzii și să vizualizeze recenziile altor utilizatori.
+- **AdminPage.js**: Oferă funcționalități administrative pentru gestionarea utilizatorilor.
+
+### Stilizare
+Stilizarea este gestionata atat direct, in fisierele .js, cat si in file-uri CSS asociate fiecarei componente
+  
