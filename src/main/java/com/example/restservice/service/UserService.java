@@ -2,6 +2,7 @@ package com.example.restservice.service;
 
 import com.example.restservice.model.User;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -24,6 +25,8 @@ public interface UserService {
     public User registerNewUser(User user);
 
     void updateBalance(Long userId, Double amount);
+
+    List<User> findAllUsers();
 
 
 }

@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.example.restservice.service.UserServiceImpl;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -114,5 +115,14 @@ public class UserController {
     public ResponseEntity<?> updateBalance(@PathVariable Long userId, @PathVariable Double amount) {
         userServiceImpl.updateBalance(userId, amount);
         return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/findall")
+    public ResponseEntity<List<User>> getAllUsers() {
+        List<User> users = userServiceImpl.findAllUsers();
+        if (users.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(users);
     }
 }

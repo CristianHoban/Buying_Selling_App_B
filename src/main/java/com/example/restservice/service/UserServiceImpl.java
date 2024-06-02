@@ -123,4 +123,9 @@ public class UserServiceImpl implements UserService{
         userContract.save(user);
     }
 
+    @Override
+    public List<User> findAllUsers() {
+        return userContract.findAll();
+    }
+
 }
