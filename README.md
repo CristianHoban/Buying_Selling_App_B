@@ -97,6 +97,16 @@ Pentru fiecare tabel din baza de date, am implementat cate un controller in care
 - http://localhost:8082/api/photos/get/{id} - endpoint pentru cautarea unei imagini cu un ID specific in baza de date
 - http://localhost:8082/api/photos/put/{id} - endpoint pentru modificarea unei imagini cu un ID specific din baza de date
 - http://localhost:8082/api/photos/delete{id} - endpoint pentru stergerea unei imagini cu un ID specific din baza de date
+## Diagrama de clase
+![WhatsApp Image 2024-06-02 at 21 48 34](https://github.com/CristianHoban/PS_Project/assets/126794626/8b1ef0dd-f9b0-4406-97be-ee8d751ff0f4)
+![WhatsApp Image 2024-06-02 at 21 44 22](https://github.com/CristianHoban/PS_Project/assets/126794626/1ceb6256-35d6-448c-b7c3-1291120b29cf)
+![WhatsApp Image 2024-06-02 at 21 43 45](https://github.com/CristianHoban/PS_Project/assets/126794626/feb32c41-eafa-4197-96bb-21b30f094915)
+![WhatsApp Image 2024-06-02 at 21 43 58](https://github.com/CristianHoban/PS_Project/assets/126794626/ab0ffd49-e92f-4a1a-aeb3-d10c1fbf89f1)
+
+### Principii de Funcționare
+1. **Separarea Concernurilor**: Fiecare parte a aplicației își gestionează propriile responsabilități, ceea ce simplifică mentenanța și scalarea.
+2. **Reutilizarea Codului**: Prin modularizarea funcționalităților (repository, serviciu, controler), codul poate fi reutilizat și extins cu ușurință.
+3. **Flexibilitate și Scalabilitate**: Oferă flexibilitate în dezvoltare și posibilitatea de a scala aplicația adăugând noi entități sau extinzând cele existente.
 
 ## Diagrame Use-case
 ![image](https://github.com/CristianHoban/PS_Project/assets/126794626/2738962c-2efc-427a-b741-25713d23024b)
