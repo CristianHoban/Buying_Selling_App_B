@@ -38,4 +38,6 @@ public interface ProductContract {
     Optional<List<Product>> findByUserId(long id);
 
     Optional<List<Product>> findAllByUserIdAndNotInTrade(Long userId);
+
+    Optional<List<Product>> findAvailableProductsByUserIdNot(Long userId);
 }

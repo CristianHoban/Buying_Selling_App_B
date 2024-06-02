@@ -64,4 +64,9 @@ public class ProductData implements ProductContract{
     public Optional<List<Product>> findAllByUserIdAndNotInTrade(Long userId) {
         return this.productRepository.findAllByUserIdAndNotInTrade(userId);
     }
+
+    @Override
+    public Optional<List<Product>> findAvailableProductsByUserIdNot(Long userId) {
+        return this.productRepository.findAvailableProductsByUserIdNot(userId);
+    }
 }

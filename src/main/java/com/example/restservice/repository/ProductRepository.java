@@ -14,4 +14,7 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 
     @Query("SELECT p FROM Product p WHERE p.user.id = :userId AND p.id NOT IN (SELECT t.product.id FROM Trade t WHERE t.product IS NOT NULL)")
     Optional<List<Product>> findAllByUserIdAndNotInTrade(Long userId);
+
+    @Query("SELECT p FROM Product p WHERE p.user.id != :userId AND NOT EXISTS (SELECT t FROM Trade t WHERE t.product.id = p.id)")
+    Optional<List<Product>> findAvailableProductsByUserIdNot(Long userId);
 }

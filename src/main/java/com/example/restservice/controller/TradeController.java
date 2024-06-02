@@ -66,4 +66,10 @@ public class TradeController {
         return trades.map(value -> new ResponseEntity<>(value, HttpStatus.OK))
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
+
+    @PostMapping("/transaction/{buyerId}/{sellerId}")
+    public ResponseEntity<?> addTransaction(@PathVariable Long buyerId, @PathVariable Long sellerId, @RequestBody Product product) {
+        tradeService.executeTransaction(buyerId, sellerId, product);
+        return ResponseEntity.ok().build();
+    }
 }

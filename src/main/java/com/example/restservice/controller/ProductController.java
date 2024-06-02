@@ -63,4 +63,13 @@ public class ProductController {
         return products.map(value -> new ResponseEntity<>(value, HttpStatus.OK))
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
+
+    @GetMapping("/available/{userId}")
+    public ResponseEntity<Optional<List<Product>>> getAvailableProducts(@PathVariable Long userId) {
+        Optional<List<Product>> products = productService.getAvailableProducts(userId);
+        if (products.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(products);
+    }
 }

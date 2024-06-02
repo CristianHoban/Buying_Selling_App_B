@@ -117,5 +117,10 @@ public class UserServiceImpl implements UserService{
         return userContract.save(user); // Save and return the new user if email not found
     }
 
+    public void updateBalance(Long userId, Double amount) {
+        User user = userContract.findById(userId).orElseThrow(() -> new RuntimeException("User not found"));
+        user.setBalance(user.getBalance() + amount);
+        userContract.save(user);
+    }
 
 }

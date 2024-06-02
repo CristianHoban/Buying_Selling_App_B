@@ -66,4 +66,8 @@ public class ProductService {
     public Optional<List<Product>> getProductsByUserIdNotInTrade(Long userId) {
         return productContract.findAllByUserIdAndNotInTrade(userId);
     }
+
+    public Optional<List<Product>> getAvailableProducts(Long userId) {
+        return productContract.findAvailableProductsByUserIdNot(userId);
+    }
 }

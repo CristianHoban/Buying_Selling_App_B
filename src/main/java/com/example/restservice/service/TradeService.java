@@ -1,7 +1,11 @@
 package com.example.restservice.service;
 
+import com.example.restservice.data.ProductContract;
 import com.example.restservice.data.TradeContract;
+import com.example.restservice.data.UserContract;
+import com.example.restservice.model.Product;
 import com.example.restservice.model.Trade;
+import com.example.restservice.model.User;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.Service;
@@ -14,9 +18,14 @@ import java.util.Optional;
 public class TradeService {
     @Autowired
     private final TradeContract tradeContract;
+    @Autowired
+    private final UserServiceImpl userService;
 
-    public TradeService(TradeContract tradeContract) {
+
+
+    public TradeService(TradeContract tradeContract, UserServiceImpl userService) {
         this.tradeContract = tradeContract;
+        this.userService = userService;
     }
 
     /**
@@ -68,4 +77,32 @@ public class TradeService {
     public void deleteTrade(Long id) {
         tradeContract.deleteById(id);
     }
+
+    public void executeTransaction(Long buyerId, Long sellerId, Product product) {
+        // Fetch the product price
+        Double amount = product.getPrice();
+
+        // Update balances
+        userService.updateBalance(buyerId, -amount);  // Subtract from buyer
+        userService.updateBalance(sellerId, amount);  // Add to seller
+
+        // Fetch user details safely using Optional
+        Optional<User> optionalBuyer = userService.getUserById(buyerId);
+        Optional<User> optionalSeller = userService.getUserById(sellerId);
+
+        // Record the transaction in the database only if both users are found
+        if (optionalBuyer.isPresent() && optionalSeller.isPresent()) {
+            User userB = optionalBuyer.get();
+            User userS = optionalSeller.get();
+
+            Trade trade = new Trade();
+            trade.setEmail_b(userB.getEmail());  // Set buyer's email
+            trade.setEmail_s(userS.getEmail());  // Set seller's email
+            trade.setProduct(product);  // Assuming there's a method to set product directly
+            tradeContract.save(trade);  // Assuming this should be tradeRepository instead of tradeContract
+        } else {
+            throw new RuntimeException("Buyer or seller not found");  // or handle this scenario as per your business logic
+        }
+    }
+
 }

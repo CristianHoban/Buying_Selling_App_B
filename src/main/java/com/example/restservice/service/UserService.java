@@ -23,5 +23,7 @@ public interface UserService {
 
     public User registerNewUser(User user);
 
+    void updateBalance(Long userId, Double amount);
+
 
 }

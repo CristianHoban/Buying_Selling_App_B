@@ -110,4 +110,9 @@ public class UserController {
         }
         return ResponseEntity.ok(registered);
     }
+    @PutMapping("/updateBalance/{userId}/{amount}")
+    public ResponseEntity<?> updateBalance(@PathVariable Long userId, @PathVariable Double amount) {
+        userServiceImpl.updateBalance(userId, amount);
+        return ResponseEntity.ok().build();
+    }
 }
